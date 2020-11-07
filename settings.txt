@@ -1,0 +1,3 @@
+SHEET_ID = abcDEFghiJKLmnoPQRstuVWXz1234567890abcDEFghi
+# Uncomment the below line if you're using a different default minecraft directory.
+# MINECRAFT_APPDATA_DIRECTORY = \\path\\to\\.minecraft
