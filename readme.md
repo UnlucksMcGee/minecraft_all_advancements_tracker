@@ -11,7 +11,5 @@ Otherwise you could also have the spreadsheet open on your phone, to view your p
 * Enable the [Google Sheets API](https://developers.google.com/sheets/api/quickstart/python) for your Google account and download the `credentials.json` file.
 
 * Change the `settings.txt` file with the sheet ID of the spreadsheet copy in your Google Drive.
-* ```python
-python run.py
-```
+* `python run.py`
 
