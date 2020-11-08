@@ -10,6 +10,10 @@ Otherwise you could also have the spreadsheet open on your phone, to view your p
 * Copy the [google sheets spreadsheet](https://docs.google.com/spreadsheets/d/1IsXHUT_P8Qd6SmHQ5gD190n4d2gNceJZZpAjimH928M) to your Google Drive: File -> Make a copy
 * Enable the [Google Sheets API](https://developers.google.com/sheets/api/quickstart/python) for your Google account and download the `credentials.json` file.
 
+* Download the [latest release](https://github.com/UnlucksMcGee/minecraft_all_advancements_tracker/releases) for your operating system.
 * Change the `settings.txt` file with the sheet ID of the spreadsheet copy in your Google Drive.
-* `python run.py`
+* Double click the main application to launch it.
+* The first time you run the application, it will open up your browser where you authenticate the API enabled above, to generate a token which is saved to `token.pickle` file.
 
+## Troubleshooting
+If the application fails to launch. Make sure you have `credentials.json` in the same directory, as well as `settings.txt` updated to the correct sheet ID.
