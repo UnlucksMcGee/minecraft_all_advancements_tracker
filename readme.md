@@ -21,3 +21,6 @@ See the [youtube walkthrough and demo](https://youtu.be/RamvJtxFHx0) or follow t
 
 ## Troubleshooting
 If the application fails to launch. Make sure you have `credentials.json` in the same directory, as well as `settings.txt` updated to the correct sheet ID.
+
+## To build to EXE
+* `pyinstaller run.py --name "MC AA Tracker" --onefile --windowed --icon icon.ico`
