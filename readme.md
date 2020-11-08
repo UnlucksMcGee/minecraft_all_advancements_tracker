@@ -6,6 +6,8 @@ This allows you to share a link to the spreadsheet so that others can see your p
 If you have a second monitor, then you can have this spreadsheet open there, for your planning.
 Otherwise you could also have the spreadsheet open on your phone, to view your progress.
 
+Note: the progress only updates when the game is saved or paused.
+
 ## To run:
 See the [youtube walkthrough and demo](https://youtu.be/RamvJtxFHx0) or follow the steps below.
 
