@@ -20,7 +20,7 @@ See the [youtube walkthrough and demo](https://youtu.be/RamvJtxFHx0) or follow t
 * The first time you run the application, it will open up your browser where you authenticate the API enabled above, to generate a token which is saved to `token.pickle` file.
 
 ## Troubleshooting
-If the application fails to launch. Make sure you have `credentials.json` in the same directory, as well as `settings.txt` updated to the correct sheet ID.
+If the application fails to launch. Make sure you have `credentials.json` in the same directory, as well as `settings.txt` updated to the correct sheet ID and Minecraft directory location (if needed). Delete the `token.pickle` file so that it will be generated again.
 
 ## To build to EXE
 * `pyinstaller run.py --name "MC AA Tracker" --onefile --windowed --icon icon.ico`

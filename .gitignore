@@ -1,6 +1,7 @@
 token.pickle
 credentials.json
 calc/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
