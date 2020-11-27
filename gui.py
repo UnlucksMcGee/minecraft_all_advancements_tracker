@@ -6,7 +6,11 @@ import time
 import tkinter as tk
 from functools import partial
 
+import googleapiclient
+import httplib2
+
 import sheet_links
+
 
 def configure_window(master, title="Python Application", width=600, height=600, resizable=True, centred=True, bg=None):
     master.title(title)
@@ -95,16 +99,22 @@ class App:
                     minecraft_directory = data
                     self.status.set(f"MINECRAFT_APPDATA_DIRECTORY = {data}")
 
-        self.saves_dir = os.path.join(minecraft_directory,"saves")
+        if not os.path.basename(os.path.normpath(minecraft_directory)) == "saves":
+            minecraft_directory = os.path.join(minecraft_directory,"saves")
 
-        
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Using saves directory: {minecraft_directory}\n")
+        self.saves_dir = minecraft_directory
 
         if self.sheet_id is None:
             print("Settings file does not set SHEET_ID.")
             sys.exit(1)
 
         if not os.path.exists(self.saves_dir):
-            print(f"Minecraft saves directory does not exist: {self.saves_dir}.")
+            err_msg = f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Minecraft saves directory does not exist: {self.saves_dir}.\nMake sure to edit settings.txt to point to your minecraft installation directory."
+            print(err_msg)
+            with open("debug_log.txt", "a") as f:
+                f.write(err_msg+"\n")
             sys.exit(1)
         
         self.master.after(100, self.update_data)
@@ -112,9 +122,27 @@ class App:
     def update_data(self):
         savename, data = self.get_current_advancement_progress()
         if data is not None:
-            self.gsheets.batchUpdate(spreadsheetId=self.sheet_id,body={'valueInputOption': "USER_ENTERED","data":data}).execute()
-            self.status.set(f"{savename}\n Last Updated at: {datetime.datetime.now().strftime('%I:%M:%S %p')}")
-
+            try:
+                self.gsheets.batchUpdate(spreadsheetId=self.sheet_id,body={'valueInputOption': "USER_ENTERED","data":data}).execute()
+                self.status.set(f"{savename}\n Last Updated at: {datetime.datetime.now().strftime('%I:%M:%S %p')}")
+            except (ConnectionResetError, httplib2.ServerNotFoundError):
+                err_msg = f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Failure to connect to internet"
+                print(err_msg)
+                self.status.set(err_msg)
+                with open("debug_log.txt", "a") as f:
+                    f.write(err_msg+"\n")
+                self.last_modified_time = None
+                self.master.after(5000, self.update_data) # Try again in 5 seconds
+                return
+            except googleapiclient.errors.HttpError:
+                err_msg = f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Refused access to the Google Sheet ID provided.\nMake sure it is correct in settings.txt"
+                print(err_msg)
+                self.status.set(err_msg)
+                with open("debug_log.txt", "a") as f:
+                    f.write(err_msg+"\n")
+                self.last_modified_time = None
+                self.master.after(5000, self.update_data) # Try again in 5 seconds
+                return
         self.master.after(1000, self.update_data)
 
     def get_reset_spreadsheet_data(self):
@@ -151,7 +179,10 @@ class App:
         json_files = sorted([os.path.join(latest_save,"advancements",f) for f in os.listdir(os.path.join(latest_save,"advancements")) if os.path.isfile(os.path.join(latest_save,"advancements",f))])
 
         if len(json_files) > 1:
-            print(f"More than one advancement json file found: {json_files}. Using the first one.")
+            msg = f"More than one advancement json file found: {json_files}. Using the first one."
+            print(msg)
+            with open("debug_log.txt", "a") as f:
+                f.write(msg+"\n")
             json_path = json_files[0]
         elif len(json_files) == 0:
             self.status.set("No advancement json file found")
