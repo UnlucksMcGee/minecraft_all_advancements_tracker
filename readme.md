@@ -1,4 +1,5 @@
 # Minecraft All Advancements 1.16.1-1.16.4 Tracker
+[Repository link](https://github.com/UnlucksMcGee/minecraft_all_advancements_tracker)
 
 Connects to a [Google Sheets](https://docs.google.com/spreadsheets/d/1IsXHUT_P8Qd6SmHQ5gD190n4d2gNceJZZpAjimH928M) spreadsheet, which is updated as advancements are achieved.
 
