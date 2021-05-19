@@ -1,4 +1,5 @@
 # This repository is now archived
+It is no longer supported/updated, but the tracker may still work.
 
 See CTM's amazing All Advancements tool for a better experience (and more supported versions): https://github.com/DarwinBaker/AATool
 
@@ -17,7 +18,7 @@ Note: the progress only updates when the game is saved or paused.
 See the [youtube walkthrough and demo](https://youtu.be/RamvJtxFHx0) or follow the steps below.
 
 * Copy the [google sheets spreadsheet](https://docs.google.com/spreadsheets/d/1IsXHUT_P8Qd6SmHQ5gD190n4d2gNceJZZpAjimH928M) to your Google Drive: File -> Make a copy
-* Enable the [Google Sheets API](https://developers.google.com/sheets/api/quickstart/python) for your Google account and download the `credentials.json` file.
+* **Important Note**: this step is different compared to the video as Google changed the process. Follow the instructions in the linked PDF: Enable the [Google Sheets API](https://github.com/UnlucksMcGee/minecraft_all_advancements_tracker/blob/main/GoogleSheetsAPI-Instructions.pdf) for your Google account and download the `credentials.json` file.
 
 * Download the [latest release](https://github.com/UnlucksMcGee/minecraft_all_advancements_tracker/releases) for your operating system.
 * Change the `settings.txt` file with the sheet ID of the spreadsheet copy in your Google Drive.
