@@ -9,7 +9,7 @@ from functools import partial
 import googleapiclient
 import httplib2
 
-import sheet_links
+import sheet_links_1_17 as sheet_links
 
 
 def configure_window(master, title="Python Application", width=600, height=600, resizable=True, centred=True, bg=None):
@@ -44,7 +44,7 @@ class App:
         self.sheet_id = None
         self.last_modified_time = None
 
-        configure_window(master=self.master, title="Minecraft All Advancements 1.16.1-1.16.4 Tracker", width=700, height=200, resizable=True, centred=True, bg=self.col_bg)
+        configure_window(master=self.master, title="Minecraft All Advancements 1.17 Tracker", width=700, height=200, resizable=True, centred=True, bg=self.col_bg)
 
         output_frame = tk.Frame(self.master, borderwidth=2, bg=self.col_fg, relief=tk.SUNKEN)
         output_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=1, anchor=tk.N, padx=10, pady=10)
@@ -193,8 +193,8 @@ class App:
         parsed_json = json.load(open(json_path,"r"))
 
         if not (sheet_links.advancements_dataversion_min <= parsed_json["DataVersion"] <= sheet_links.advancements_dataversion_max):
-            self.status.set("Invalid Version used. Try 1.16.1 - 1.16.4")
-            return "Invalid Version used. Try 1.16.1 - 1.16.4", None
+            self.status.set("Invalid Version used. Try 1.17+")
+            return "Invalid Version used. Try 1.17+", None
 
         data = []
         
